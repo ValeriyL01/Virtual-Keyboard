@@ -141,7 +141,7 @@ const en = [
     },
     {
       key: 'Delete',       
-      nameShift: 'Del',      
+      nameShift: 'Delete',      
       code: 'Delete',        
     },
     {
