@@ -16,7 +16,7 @@ KEYBOARD.classList.add('keyboard')
 CONTAINER.appendChild(TEXT)
 TEXT.classList.add('text')
 TEXT.textContent = 'Клавиатура сделана для операционной системы Windows'
-
+TEXTAREA.focus()
 let lang = en
 
 function addButton(lang){
@@ -102,7 +102,9 @@ document.addEventListener('mouseup',()=>{
    if (element.code === 'AltRight'){
     btn.classList.add('alt')
    }
-  
+   if (element.code === 'MetaLeft'){
+    btn.classList.add('win')
+   }
 });
 }
 addButton(en)
@@ -113,12 +115,14 @@ const CTRL = document.querySelectorAll('.Ctrl')
 const ALT = document.querySelectorAll('.alt')
 const CAPS = document.querySelector('.CapsLock')
 const TAB = document.querySelector('.Tab')
+const WIN = document.querySelector('.win')
 console.log(BTN )
 function downButton(){
     
 document.addEventListener('keydown',(e)=>{
     BTN.forEach((elem)=>{
-        if(e.key === elem.innerHTML && e.key !== 'Shift' && e.key !== 'Alt' && e.key !== 'Ctrl'){
+        if(e.key === elem.innerHTML && e.key !== 'Shift' &&
+         e.key !== 'Alt' && e.key !== 'Ctrl'){
             elem.classList.add('btn-key')
         }
         
@@ -137,9 +141,22 @@ document.addEventListener('keydown',(e)=>{
         }
         if(e.code === 'AltLeft'){
             ALT[0].classList.add('btn-key')
+            e.preventDefault()
         }
         if(e.code === 'AltRight'){
             ALT[1].classList.add('btn-key')
+            e.preventDefault()
+        }
+        if(e.code === 'Tab'){
+            TAB.classList.add('btn-key')
+                e.preventDefault()
+            
+        }
+        
+        if(e.code === 'MetaLeft'){
+            WIN.classList.add('btn-key')
+                e.preventDefault()
+            
         }
     })
 })
@@ -156,21 +173,48 @@ function upButton(){
         })
     })
     }
-    upButton()
+    upButton() 
 
-    
-    const textarea = document.querySelector('.textarea')
+    function textPrinting(){
+    const TEXTAREA = document.querySelector('.textarea')
 
-    console.log(BTN.innerHTML)
-    KEYBOARD.addEventListener('click',(e)=>{
-       
-       textarea.innerHTML += e.target.innerHTML
-    
-       textarea.focus()
-       
-       
+   
+    KEYBOARD.addEventListener('click',(e)=>{  
+        let symbol = e.target.innerHTML
+       if(e.target.innerHTML === 'Shift' ||e.target.innerHTML === 'Ctrl'||
+       e.target.innerHTML === 'Alt' || e.target.innerHTML === 'Win' || 
+       e.target.innerHTML === 'Win'|| e.target.innerHTML === 'CapsLock'|| 
+       e.target.innerHTML === 'Backspace'|| e.target.innerHTML === 'Delete'){
+     symbol = ''
+       }
+       if(e.target.innerHTML === 'Tab'){
+        symbol = '\t'
+    }
+  
+     let cursor = TEXTAREA.selectionStart;
+     let text = TEXTAREA.value;
+     TEXTAREA.value = text + symbol
+     cursor++;
+    TEXTAREA.focus()
     })
 
+    }
 
 
+    textPrinting()
 
+    function PressBackspace(){
+        const TEXTAREA = document.querySelector('.textarea')
+        KEYBOARD.addEventListener('click',(e)=>{  
+            let symbol = e.target.innerHTML
+           if(e.target.innerHTML === 'Backspace'){
+            symbol = ''
+            let cursor = TEXTAREA.selectionStart;
+            let text = TEXTAREA.value;
+          TEXTAREA.value =  text.slice(0, -1)
+         cursor--;
+        TEXTAREA.focus()
+        }
+        })
+        }
+        PressBackspace()
