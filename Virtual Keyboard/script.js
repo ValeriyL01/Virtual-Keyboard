@@ -51,12 +51,7 @@ document.addEventListener('mouseup',()=>{
 })
 //
 
-/*document.addEventListener('keydown',(e)=>{
-    if(e.code === 'CapsLock'){
-        shiftUp = btn.innerHTML =element.nameShift
-    }
-})
-*/
+
 
    btn.classList.add('btn')
    if(element.key === 'Tab'||element.key === 'Backspace' ||element.key === 'Delete'||
@@ -121,6 +116,7 @@ function downButton(){
     
 document.addEventListener('keydown',(e)=>{
     BTN.forEach((elem)=>{
+       
         if(e.key === elem.innerHTML && e.key !== 'Shift' &&
          e.key !== 'Alt' && e.key !== 'Ctrl'){
             elem.classList.add('btn-key')
@@ -158,6 +154,9 @@ document.addEventListener('keydown',(e)=>{
                 e.preventDefault()
             
         }
+         if(e.key === 'CapsLock'){
+            Caps()
+        }
     })
 })
 }
@@ -166,10 +165,17 @@ downButton()
 function upButton(){
     document.addEventListener('keyup',(e)=>{
         BTN.forEach((elem)=>{
-            if(elem.classList.contains('btn-key') ){
+            if(elem.classList.contains('btn-key')){
                 elem.classList.remove('btn-key')
             }
-         
+            if(e.code === 'CapsLock'){
+                CAPS.classList.add('btn-key')
+                
+                e.stopImmediatePropagation()
+                
+                
+            }
+            
         })
     })
     }
@@ -190,7 +196,9 @@ function upButton(){
        if(e.target.innerHTML === 'Tab'){
         symbol = '\t'
     }
-  
+       if(e.target.innerHTML === 'Enter'){
+        symbol = '\n'
+    }
      let cursor = TEXTAREA.selectionStart;
      let text = TEXTAREA.value;
      TEXTAREA.value = text + symbol
@@ -218,3 +226,74 @@ function upButton(){
         })
         }
         PressBackspace()
+
+
+        function PressDel(){
+            const TEXTAREA = document.querySelector('.textarea')
+            KEYBOARD.addEventListener('click',(e)=>{  
+                let symbol = e.target.innerHTML
+               if(e.target.innerHTML === 'Delete'){
+                symbol = ''
+                let cursor = TEXTAREA.selectionStart;
+                let text = TEXTAREA.value;
+              TEXTAREA.value =  text.slice(0, -1)
+             cursor--;
+            TEXTAREA.focus()
+            }
+            })
+            }
+            PressDel()
+
+
+           function Caps(){
+             
+            BTN.forEach((el)=>{
+            
+             if(CAPS.classList.contains('btn-key')){
+                
+            if(el.innerHTML !=='Shift' && el.innerHTML !=='Tab' && el.innerHTML !=='Backspace'&& 
+            el.innerHTML !=='Enter'&& el.innerHTML !=='CapsLock'&& el.innerHTML !=='Alt'&& el.innerHTML !=='Win'
+             && el.innerHTML !=='Ctrl'&& el.innerHTML !=='Delete'){
+                 let up = el.innerHTML.toUpperCase() 
+                 el.innerHTML = up
+                  CAPS.classList.add('btn-key')
+             }
+             
+         }  
+             
+            })     
+}
+
+document.addEventListener('keydown',Caps)
+document.addEventListener('click',(e)=>{
+    
+    if(e.target.innerHTML === 'CapsLock'){
+        CAPS.classList.toggle('btn-key')
+    BTN.forEach((el)=>{
+          if(el.innerHTML!==el.innerHTML.toUpperCase()){           
+       if(el.innerHTML !=='Shift' && el.innerHTML !=='Tab' && el.innerHTML !=='Backspace'&& 
+       el.innerHTML !=='Enter'&& el.innerHTML !=='CapsLock'&& el.innerHTML !=='Alt'&& el.innerHTML !=='Win'
+        && el.innerHTML !=='Ctrl'&& el.innerHTML !=='Delete'){
+            let up = el.innerHTML.toUpperCase() 
+            el.innerHTML = up
+               
+        }
+          }else{
+            if(el.innerHTML !=='Shift' && el.innerHTML !=='Tab' && el.innerHTML !=='Backspace'&& 
+            el.innerHTML !=='Enter'&& el.innerHTML !=='CapsLock'&& el.innerHTML !=='Alt'&& el.innerHTML !=='Win'
+             && el.innerHTML !=='Ctrl'&& el.innerHTML !=='Delete'){
+                 let down = el.innerHTML.toLowerCase() 
+                 el.innerHTML = down
+                  
+             }
+          }
+        
+       })
+    
+    }
+})
+
+
+
+
+
