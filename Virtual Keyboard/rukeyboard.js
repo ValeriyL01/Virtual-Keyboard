@@ -141,7 +141,7 @@ const ru = [
     },
     {
       key: 'Delete',
-      nameShift: 'Del',
+      nameShift: 'Delete',
       code: 'Delete',
     },
     {

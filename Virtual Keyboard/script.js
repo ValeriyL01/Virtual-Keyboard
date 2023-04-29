@@ -17,11 +17,9 @@ CONTAINER.appendChild(TEXT)
 TEXT.classList.add('text')
 TEXT.textContent = 'Клавиатура сделана для операционной системы Windows'
 TEXTAREA.focus()
-let lang = en
 
-function addButton(lang){
-        
-  lang.forEach(element => {
+function addButton(){
+   en.forEach(element => {
    let btn = document.createElement('div')
    KEYBOARD.appendChild(btn)
    //shift
@@ -50,8 +48,6 @@ document.addEventListener('mouseup',()=>{
     }
 })
 //
-
-
 
    btn.classList.add('btn')
    if(element.key === 'Tab'||element.key === 'Backspace' ||element.key === 'Delete'||
@@ -100,9 +96,21 @@ document.addEventListener('mouseup',()=>{
    if (element.code === 'MetaLeft'){
     btn.classList.add('win')
    }
+   if (element.code === 'ArrowUp'){
+    btn.classList.add('ArrowUp')
+   }
+   if (element.code === 'ArrowLeft'){
+    btn.classList.add('ArrowLeft')
+   }
+   if (element.code === 'ArrowDown'){
+    btn.classList.add('ArrowDown')
+   }
+   if (element.code === 'ArrowRight'){
+    btn.classList.add('ArrowRight')
+   }
 });
 }
-addButton(en)
+addButton()
 
 const BTN = document.querySelectorAll('.btn')
 const SHIFT = document.querySelectorAll('.Shift')
@@ -111,6 +119,10 @@ const ALT = document.querySelectorAll('.alt')
 const CAPS = document.querySelector('.CapsLock')
 const TAB = document.querySelector('.Tab')
 const WIN = document.querySelector('.win')
+const ArrowUp = document.querySelector('.ArrowUp')
+const ArrowLeft = document.querySelector('.ArrowLeft')
+const ArrowDown = document.querySelector('.ArrowDown')
+const ArrowRight = document.querySelector('.ArrowRight')
 console.log(BTN )
 function downButton(){
     
@@ -145,10 +157,8 @@ document.addEventListener('keydown',(e)=>{
         }
         if(e.code === 'Tab'){
             TAB.classList.add('btn-key')
-                e.preventDefault()
-            
+                e.preventDefault()     
         }
-        
         if(e.code === 'MetaLeft'){
             WIN.classList.add('btn-key')
                 e.preventDefault()
@@ -157,11 +167,31 @@ document.addEventListener('keydown',(e)=>{
          if(e.key === 'CapsLock'){
             Caps()
         }
+        if(e.code === 'ArrowUp'){
+            e.preventDefault()
+            ArrowUp.innerHTML = '&#9650'
+            ArrowUp.classList.add('btn-key')
+        }
+        if(e.code === 'ArrowLeft'){
+            e.preventDefault()
+            ArrowLeft.innerHTML = '&#9668'
+            ArrowLeft.classList.add('btn-key')
+        }
+        if(e.code === 'ArrowDown'){
+            e.preventDefault()
+            ArrowDown.innerHTML = '&#9660'
+            ArrowDown.classList.add('btn-key')
+        }
+        if(e.code === 'ArrowRight'){
+            e.preventDefault()
+            ArrowRight.innerHTML = '&#9658'
+            ArrowRight.classList.add('btn-key')
+        }
+      
     })
 })
 }
 downButton()
-
 function upButton(){
     document.addEventListener('keyup',(e)=>{
         BTN.forEach((elem)=>{
@@ -170,21 +200,14 @@ function upButton(){
             }
             if(e.code === 'CapsLock'){
                 CAPS.classList.add('btn-key')
-                
-                e.stopImmediatePropagation()
-                
-                
+                e.stopImmediatePropagation() 
             }
-            
         })
     })
     }
     upButton() 
-
     function textPrinting(){
     const TEXTAREA = document.querySelector('.textarea')
-
-   
     KEYBOARD.addEventListener('click',(e)=>{  
         let symbol = e.target.innerHTML
        if(e.target.innerHTML === 'Shift' ||e.target.innerHTML === 'Ctrl'||
@@ -205,10 +228,27 @@ function upButton(){
      cursor++;
     TEXTAREA.focus()
     })
-
     }
-
-
+    document.addEventListener('keydown',(e)=>{  
+        const TEXTAREA = document.querySelector('.textarea')
+        let symbol = e.target.innerHTML
+            if(e.code === 'ArrowUp')
+            symbol = '▲'
+            if(e.code === 'ArrowLeft')
+            symbol = '◄'
+            if(e.code === 'ArrowDown')
+            symbol = '▼'
+            if(e.code === 'ArrowRight')
+            symbol = '►'
+            if(e.code === 'Tab')
+            symbol = '\t'
+     let cursor = TEXTAREA.selectionStart;
+     let text = TEXTAREA.value;
+     TEXTAREA.value = text + symbol
+     cursor++;
+     TEXTAREA.focus()
+    })
+   
     textPrinting()
 
     function PressBackspace(){
@@ -236,14 +276,15 @@ function upButton(){
                 symbol = ''
                 let cursor = TEXTAREA.selectionStart;
                 let text = TEXTAREA.value;
-              TEXTAREA.value =  text.slice(0, -1)
-             cursor--;
+                let stringStart = text.slice(0, cursor);
+                let stringEnd = text.slice(cursor + 1, text.length);
+              TEXTAREA.value =  stringStart + stringEnd
+    TEXTAREA.setSelectionRange(cursor, cursor);
             TEXTAREA.focus()
             }
             })
             }
             PressDel()
-
 
            function Caps(){
              
@@ -292,7 +333,6 @@ document.addEventListener('click',(e)=>{
     
     }
 })
-
 
 
 
