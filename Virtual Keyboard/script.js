@@ -15,7 +15,7 @@ CONTAINER.appendChild(KEYBOARD)
 KEYBOARD.classList.add('keyboard')
 CONTAINER.appendChild(TEXT)
 TEXT.classList.add('text')
-TEXT.textContent = 'Клавиатура сделана для операционной системы Windows'
+TEXT.textContent = 'Клавиатура сделана для операционной системы Windows  Переключение языка левый Ctrl + Alt'
 TEXTAREA.focus()
 
 function addButton(){
@@ -25,7 +25,19 @@ function addButton(){
    //shift
    
   let shiftUp = btn.innerHTML = element.key
-   document.addEventListener('keydown',(e)=>{
+  
+  let flag = false
+let count = 0
+  document.addEventListener('keydown',(e)=>{
+  if(e.code === 'ControlLeft'){
+      flag = true
+  }
+  if(e.code === 'AltLeft' && flag){
+  flag = false
+  count++
+  if(count%2===0){  
+    shiftUp = btn.innerHTML =element.key
+    document.addEventListener('keydown',(e)=>{
         if(e.key === 'Shift' ){
             shiftUp = btn.innerHTML =element.nameShift
         }
@@ -47,6 +59,35 @@ document.addEventListener('mouseup',()=>{
         shiftUp = btn.innerHTML =element.key
     }
 })
+}else {
+    shiftUp = btn.innerHTML =element.key2
+    document.addEventListener('keydown',(e)=>{
+        if(e.key === 'Shift' ){
+            shiftUp = btn.innerHTML =element.nameShift2
+        }
+})
+document.addEventListener('keyup',(e)=>{
+    if(e.key === 'Shift'){
+        shiftUp = btn.innerHTML = element.key2
+    }
+})
+let isFlag = false
+document.addEventListener('mousedown',(e)=>{
+    if(e.target === SHIFT[0] || e.target === SHIFT[1]){
+        shiftUp = btn.innerHTML =element.nameShift2
+        isFlag = true
+    }
+})
+document.addEventListener('mouseup',()=>{
+    if(isFlag  ){
+        shiftUp = btn.innerHTML =element.key2
+    }
+})
+}
+  }
+  })
+ 
+ 
 //
 
    btn.classList.add('btn')
@@ -109,6 +150,7 @@ document.addEventListener('mouseup',()=>{
     btn.classList.add('ArrowRight')
    }
 });
+
 }
 addButton()
 
@@ -210,6 +252,7 @@ function upButton(){
     const TEXTAREA = document.querySelector('.textarea')
     KEYBOARD.addEventListener('click',(e)=>{  
         let symbol = e.target.innerHTML
+        console.log(symbol)
        if(e.target.innerHTML === 'Shift' ||e.target.innerHTML === 'Ctrl'||
        e.target.innerHTML === 'Alt' || e.target.innerHTML === 'Win' || 
        e.target.innerHTML === 'Win'|| e.target.innerHTML === 'CapsLock'|| 
@@ -333,6 +376,7 @@ document.addEventListener('click',(e)=>{
     
     }
 })
+
 
 
 
