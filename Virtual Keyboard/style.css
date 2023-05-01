@@ -1,0 +1,93 @@
+body{
+    box-sizing: border-box;
+    background-color:rgb(237, 191, 131);
+    font-family:'Titillium Web', sans-serif;
+    font-weight:400;
+
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 895px;
+    margin: 50px auto 0;
+      
+  }
+  
+  .textarea{
+      width: 500px;
+      height: 150px;
+      margin: 0 auto;
+      outline: none;
+      padding: 10px;
+  }
+  
+  .keyboard{
+     display: flex;
+     flex-wrap: wrap;
+     gap:8px;
+     margin-top: 20px;
+     background-color: rgb(239, 207, 164);
+     border: 1px solid rgb(113, 113, 109);
+     border-radius: 10px;
+     padding: 15px 10px 10px 10px;
+     width: 881px;
+    
+  }
+  
+  .text{
+      margin: 20px auto 0;
+      width: 500px;
+  }
+  
+  .btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 47px;
+    height: 47px;
+    background-color: bisque;
+    border-radius: 7px;
+    border: 1px solid rgb(113, 113, 109);
+    box-shadow: 0px 5px 0px 0px #817f7fa5;
+    position: relative;
+    bottom: 3px;
+  }
+  .btn:hover{
+    background-color: rgb(252, 214, 168);
+  }
+  .btn:active{
+    background-color: rgb(252, 214, 168);
+    box-shadow: none;
+    bottom: 0px;
+    transition: 0.2s;
+  }
+  .btn-key{
+    background-color: rgb(252, 214, 168);
+    box-shadow: none;
+    bottom: 0px;
+    transition: 0.2s;
+  }
+  .btn2{
+      background-color: rgb(195, 165, 128);
+  }
+  
+  .CapsLock,
+  .Shift,
+  .Enter{
+      width: 117px;
+  }
+  
+  .Tab,
+  .Delete{
+      width: 60px;
+  }
+  .Backspace{
+  width: 130px;
+  }
+  .space{
+      width: 390px;
+  }
+
+  .Ctrl{
+    width:59px ;
+  }
