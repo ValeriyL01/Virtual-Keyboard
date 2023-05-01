@@ -165,7 +165,6 @@ const ArrowUp = document.querySelector('.ArrowUp')
 const ArrowLeft = document.querySelector('.ArrowLeft')
 const ArrowDown = document.querySelector('.ArrowDown')
 const ArrowRight = document.querySelector('.ArrowRight')
-console.log(BTN )
 function downButton(){
     
 document.addEventListener('keydown',(e)=>{
@@ -229,7 +228,7 @@ document.addEventListener('keydown',(e)=>{
             ArrowRight.innerHTML = '&#9658'
             ArrowRight.classList.add('btn-key')
         }
-      
+
     })
 })
 }
@@ -252,7 +251,6 @@ function upButton(){
     const TEXTAREA = document.querySelector('.textarea')
     KEYBOARD.addEventListener('click',(e)=>{  
         let symbol = e.target.innerHTML
-        console.log(symbol)
        if(e.target.innerHTML === 'Shift' ||e.target.innerHTML === 'Ctrl'||
        e.target.innerHTML === 'Alt' || e.target.innerHTML === 'Win' || 
        e.target.innerHTML === 'Win'|| e.target.innerHTML === 'CapsLock'|| 
@@ -309,8 +307,6 @@ function upButton(){
         })
         }
         PressBackspace()
-
-
         function PressDel(){
             const TEXTAREA = document.querySelector('.textarea')
             KEYBOARD.addEventListener('click',(e)=>{  
@@ -328,13 +324,9 @@ function upButton(){
             })
             }
             PressDel()
-
            function Caps(){
-             
             BTN.forEach((el)=>{
-            
-             if(CAPS.classList.contains('btn-key')){
-                
+             if(CAPS.classList.contains('btn-key')){  
             if(el.innerHTML !=='Shift' && el.innerHTML !=='Tab' && el.innerHTML !=='Backspace'&& 
             el.innerHTML !=='Enter'&& el.innerHTML !=='CapsLock'&& el.innerHTML !=='Alt'&& el.innerHTML !=='Win'
              && el.innerHTML !=='Ctrl'&& el.innerHTML !=='Delete'){
@@ -342,15 +334,12 @@ function upButton(){
                  el.innerHTML = up
                   CAPS.classList.add('btn-key')
              }
-             
-         }  
-             
+         }    
             })     
 }
 
 document.addEventListener('keydown',Caps)
 document.addEventListener('click',(e)=>{
-    
     if(e.target.innerHTML === 'CapsLock'){
         CAPS.classList.toggle('btn-key')
     BTN.forEach((el)=>{
@@ -359,8 +348,7 @@ document.addEventListener('click',(e)=>{
        el.innerHTML !=='Enter'&& el.innerHTML !=='CapsLock'&& el.innerHTML !=='Alt'&& el.innerHTML !=='Win'
         && el.innerHTML !=='Ctrl'&& el.innerHTML !=='Delete'){
             let up = el.innerHTML.toUpperCase() 
-            el.innerHTML = up
-               
+            el.innerHTML = up     
         }
           }else{
             if(el.innerHTML !=='Shift' && el.innerHTML !=='Tab' && el.innerHTML !=='Backspace'&& 
